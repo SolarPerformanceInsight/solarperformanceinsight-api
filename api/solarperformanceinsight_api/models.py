@@ -709,16 +709,31 @@ class PVSystem(SPIBase):
 
     name: str = UserString(
         ...,
+        title="PV System Name",
         description="Name of the system",
     )
     latitude: float = Field(
-        ..., description="Latitude of the system in degrees North", ge=-90, le=90
+        ...,
+        description=(
+            "Latitude of the system in degrees NORTH of the equator. Use a NEGATIVE sign "
+            "for all systems in the southern hemisphere."
+        ),
+        ge=-90,
+        le=90,
     )
     longitude: float = Field(
-        ..., description="Longitude of the system in degrees East", ge=-180, le=180
+        ...,
+        description="Longitude of the system in degrees EAST of the prime meridian (zero degrees).",
+        ge=-180,
+        le=180,
     )
     elevation: float = Field(
-        ..., description="Elevation of the system above sea level in meters", ge=-300
+        ...,
+        description=(
+            "Elevation of the system in METERS above sea level. Use a NEGATIVE sign if the system "
+            "is below sea level."
+        ),
+        ge=-300,
     )
     inverters: List[Inverter] = Field(
         ..., description="List of inverters that make up this system", min_items=1
